@@ -10,7 +10,7 @@ with open('../data/final_dataset.pkl', 'rb') as f:
     train_df, test_df = pickle.load(f)
 
 y_train = train_df['reordered']
-x_train = train_df.drop(columns='reordered')
+x_train = train_df.drop(columns=['reordered', 'user_id', 'product_id'])
 feature_names = x_train.columns
 print('Start training model...')
 
@@ -32,7 +32,7 @@ with open('../result/feature_names.pkl', 'wb') as f:
     pickle.dump(feature_names, f)
 print('Model saved.\nMaking prediction')
 
-x_test = test_df.drop(columns='reordered')
+x_test = test_df.drop(columns=['reordered', 'user_id', 'product_id'])
 y_test = test_df['reordered']
 
 y_pred_prob = gbm.predict_proba(x_test, ntree_limit=843)[:,1]
