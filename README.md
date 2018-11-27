@@ -1,51 +1,49 @@
-# Project_Mcnulty - Instacard Market Basket Analysis
+# Project Mcnulty: Instacard Market Basket Analysis
 This is the [Instacart Market Basket Analysis project from Kaggle](https://www.kaggle.com/c/instacart-market-basket-analysis) with some modification. Instead of predicting what the customer will buy in the next order, I am trying to predict whether they will reorder the products they've ordered in the past. 
 
 ### Feature List
 1. User Features  
-    - Total order number
-    - Total product number
+    - Total order count
+    - Total product count
     - Average cart size
-    - Percentage of orders on weekend vs weekday
     - Average days between orders
-    - Number of different product the user ever purchased
+    - Number of unique product the user ever purchased
     - Percentage of products that the user purchased only once among all the products
 2. Product Features
-    - Total product reorder count
     - Total counts of order on this product
     - Averge product add to cart order 
-    - Percentage of reorder among total orders
-    - Department
-    - Aisle
+    - Order percentage
+    - Binned department
+    - Binned Aisle
 3. User-Product Features
-    - How many times the user reorder the product in the past
+    - How many times the user reordered the product in the past
     - How many orders ago is the last time the user ordered that product
-    - Days since the user last time ordered the product
-    - Average days since the prior order each time the user orders the product
+    - Average days between the user ordered the product
     - Average add to cart order over scaled within each user
-    - Average add to cart order
     - Percentage of the user's orders containing the product
-    - Average days betweeen the customer order the product.
-    - Ratio between average days the user purchase a product vs days since last order
-    - Has the user order the same product that day
+    - Days between orders last time the user purchased the product
 4. Order Specific
-    - Order day of the week
-    - Order hour of the day
+    - Days since last product order vs average
+    - Whether ordered the product the same day
     - Days since last order
+    - Deviation of the days since prior order to the mean
 
 ### Model and Hyperparameters
 Gradient Boosting (XGB)
-- n_estimators = 339
-- max_depth = 4
-- learning_rate = 0.025
-- subsample = 0.7
-- colsample = 0.6
-- Probability threshold = 0.2138
+- n_estimators = 843
+- max_depth = 6
+- learning_rate = 0.01
+- subsample = 0.3
+- colsample = 0.7
+- Probability threshold = 0.2114
 - Metrics - f1 score 
 
 ### Results 
-Average f1 on cross validation of subset (2.5%, 0.2M records): 0.429 (std. 0.014)
+Average f1 on cross validation of subset (6.3%, 1.9M records): 0.437 (std. 0.0078)
 
-F1 on holdout set: 0.401
+F1 on holdout set: 0.436
+
+#### Note
+The python scripts were used to prepare dataset, train the model and make prediction. Model selection and feature engineering were performed on a subset of data using notebook. When using the script, put raw data in the raw_data fold and create data and result fold to save results and the data sets. 
 
 
